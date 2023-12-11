@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Remarkablemark\RectorTemplate;
+namespace Remarkablemark\RectorLaravelServiceMocking;
 
 use PhpParser\Node;
 use PhpParser\Node\Expr\MethodCall;
@@ -11,7 +11,7 @@ use Rector\Core\Rector\AbstractRector;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
-final class ExampleRector extends AbstractRector
+final class LaravelServiceMockingRector extends AbstractRector
 {
     /**
      * @see https://github.com/rectorphp/php-parser-nodes-docs/

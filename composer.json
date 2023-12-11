@@ -1,10 +1,13 @@
 {
-    "name": "remarkablemark/rector-template",
+    "name": "remarkablemark/rector-laravel-service-mocking",
     "type": "library",
-    "description": "Rector template",
+    "description": "Rector to replace deprecated Laravel service mocking testing methods",
     "keywords": [
         "rector",
-        "template"
+        "laravel",
+        "service",
+        "mocking",
+        "testing"
     ],
     "license": "MIT",
     "authors": [
@@ -20,7 +23,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Remarkablemark\\RectorTemplate\\": "src"
+            "Remarkablemark\\RectorLaravelServiceMocking\\": "src"
         }
     },
     "require-dev": {
