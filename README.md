@@ -40,12 +40,24 @@ return static function (RectorConfig $rectorConfig): void {
 };
 ```
 
-It's recommended to run inside tests:
+Run inside of tests only:
 
 ```php
 $rectorConfig->paths([
     __DIR__ . '/tests',
 ]);
+```
+
+See the diff:
+
+```php
+vendor/bin/rector process src --dry-run
+```
+
+Apply the rule:
+
+```php
+vendor/bin/rector process src
 ```
 
 ## Rule
