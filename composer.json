@@ -32,5 +32,5 @@
         "rector/rector": "0.18.12",
         "symplify/rule-doc-generator": "11.1.25"
     },
-    "version": "1.0.0"
+    "version": "1.0.1"
 }

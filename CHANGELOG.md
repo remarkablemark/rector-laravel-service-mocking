@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/remarkablemark/rector-laravel-service-mocking/compare/v1.0.0...v1.0.1) (2023-12-11)
+
+
+### Bug Fixes
+
+* **composer:** require php &gt;=8.0 ([6824cd5](https://github.com/remarkablemark/rector-laravel-service-mocking/commit/6824cd5e5e8354176c4c5cc5d4ac0fe8d2c14acc))
+
 ## 1.0.0 (2023-12-11)
 
 
