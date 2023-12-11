@@ -40,6 +40,45 @@ return static function (RectorConfig $rectorConfig): void {
 };
 ```
 
+It's recommended to run inside tests:
+
+```php
+$rectorConfig->paths([
+    __DIR__ . '/tests',
+]);
+```
+
+## Rule
+
+### Before
+
+```php
+$this->expectsEvents([MyEvent::class]);
+```
+
+### After
+
+```php
+ \Illuminate\Support\Facades\Event::fake([MyEvent::class])->assertDispatched([MyEvent::class]);
+```
+
+The test may still fail because of `assertDispatched` so it's recommended to refactor to:
+
+```php
+Event::fake([MyEvent::class]);
+// dispatch your event here...
+Event::assertDispatched(MyEvent::class);
+```
+
+If you have multiple events, call `assertDispatched` for each event:
+
+```php
+Event::fake([MyEvent1::class, MyEvent2::class]);
+// ...
+Event::assertDispatched(MyEvent1::class);
+Event::assertDispatched(MyEvent2::class);
+```
+
 ## License
 
 [MIT](LICENSE)
