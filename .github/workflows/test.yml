@@ -19,7 +19,9 @@ jobs:
           coverage: none
 
       - name: Install dependencies
-        run: composer install --no-interaction --prefer-dist --optimize-autoloader
+        run: |
+          composer remove --dev symplify/rule-doc-generator
+          composer install --no-interaction --prefer-dist --optimize-autoloader
 
       - name: Run tests
         run: vendor/bin/phpunit tests
