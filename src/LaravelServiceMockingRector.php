@@ -6,50 +6,151 @@ namespace Remarkablemark\RectorLaravelServiceMocking;
 
 use PhpParser\Node;
 use PhpParser\Node\Expr\MethodCall;
+use PhpParser\Node\Expr\StaticCall;
 use PhpParser\Node\Identifier;
+use PhpParser\Node\Name\FullyQualified;
+use PhpParser\Node\Stmt\ClassMethod;
+use Rector\Core\PhpParser\Node\BetterNodeFinder;
 use Rector\Core\Rector\AbstractRector;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 final class LaravelServiceMockingRector extends AbstractRector
 {
-    /**
-     * @see https://github.com/rectorphp/php-parser-nodes-docs/
-     * @return array<class-string<Node>>
-     */
-    public function getNodeTypes(): array
-    {
-        return [MethodCall::class];
-    }
-
-    /**
-     * @param MethodCall $node
-     */
-    public function refactor(Node $node): ?Node
-    {
-        $methodName = $this->getName($node->name);
-
-        if (! str_starts_with((string) $methodName, 'set')) {
-            return null;
-        }
-
-        $newMethodName = preg_replace('#^set#', 'change', $methodName);
-        $node->name = new Identifier($newMethodName);
-
-        return $node;
+    public function __construct(
+        private BetterNodeFinder $betterNodeFinder
+    ) {
     }
 
     public function getRuleDefinition(): RuleDefinition
     {
         return new RuleDefinition(
-            'Change method calls from set* to change*.', [
+            'Replace deprecated Laravel service mocking testing methods such as `expectsEvents`, `expectsJobs`, and `expectsNotifications`',
+            [
                 new CodeSample(
-                    // code before
-                    '$user->setPassword("123456");',
-                    // code after
-                    '$user->changePassword("123456");'
-                ),
+                    <<<'CODE_SAMPLE'
+class SomeClassTest
+{
+    public function testExpectsEvents(): void
+    {
+        $this->expectsEvents([EventA::class, EventB::class]);
+    }
+
+    public function testExpectsJobs(): void
+    {
+        $this->expectsJobs([Job::class]);
+    }
+
+    public function testExpectsNotification(): void
+    {
+        $this->expectsNotification([
+            NotificationA::class,
+            NotificationB::class,
+        ]);
+    }
+}
+CODE_SAMPLE,
+                    <<<'CODE_SAMPLE'
+class SomeClassTest
+{
+    public function testExpectsEvents(): void
+    {
+        \Illuminate\Support\Facades\Event::fake([EventA::class, EventB::class])->assertDispatched([EventA::class, EventB::class]);
+    }
+
+    public function testExpectsJobs(): void
+    {
+        \Illuminate\Support\Facades\Queue::fake([Job::class])->assertPushed([Job::class]);
+    }
+
+    public function testExpectsNotification(): void
+    {
+        \Illuminate\Support\Facades\Notification::fake([
+            NotificationA::class,
+            NotificationB::class,
+        ])->assertSentTo([
+            NotificationA::class,
+            NotificationB::class,
+        ]);
+    }
+}
+CODE_SAMPLE
+                )
             ]
         );
+    }
+
+    /**
+     * @return array<class-string<Node>>
+     */
+    public function getNodeTypes(): array
+    {
+        return [ClassMethod::class];
+    }
+
+    /**
+     * @param ClassMethod $node
+     */
+    public function refactor(Node $node): ?Node
+    {
+        $subNode = $this->betterNodeFinder->findFirstInstanceOf($node, MethodCall::class);
+
+        if (! $subNode) {
+            return null;
+        }
+
+        $methodName = $this->getName($subNode->name);
+
+        switch ($methodName) {
+            case 'expectsEvents':
+                $subNode->var = new StaticCall(
+                    new FullyQualified('Illuminate\Support\Facades\Event'),
+                    'fake',
+                    $subNode->args
+                );
+                $subNode->name = new Identifier('assertDispatched');
+                return $node;
+
+            case 'doesntExpectsEvents':
+                $subNode->var = new StaticCall(
+                    new FullyQualified('Illuminate\Support\Facades\Event'),
+                    'fake',
+                    $subNode->args
+                );
+                $subNode->name = new Identifier('assertNotDispatched');
+                return $node;
+
+            case 'expectsJobs':
+                $subNode->var = new StaticCall(
+                    new FullyQualified('Illuminate\Support\Facades\Queue'),
+                    'fake',
+                    $subNode->args
+                );
+                $subNode->name = new Identifier('assertPushed');
+                return $node;
+
+            case 'doesntExpectsJobs':
+                $subNode->var = new StaticCall(
+                    new FullyQualified('Illuminate\Support\Facades\Queue'),
+                    'fake',
+                    $subNode->args
+                );
+                $subNode->name = new Identifier('assertNotPushed');
+                return $node;
+
+            case 'expectsNotification':
+                $subNode->var = new StaticCall(
+                    new FullyQualified('Illuminate\Support\Facades\Notification'),
+                    'fake',
+                    $subNode->args
+                );
+                $subNode->name = new Identifier('assertSentTo');
+                return $node;
+
+            default:
+                return null;
+        }
+
+        return null;
     }
 }

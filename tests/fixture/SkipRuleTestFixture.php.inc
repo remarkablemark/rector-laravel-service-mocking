@@ -1,13 +1,24 @@
 <?php
 
-namespace Package\Tests\Rector\MyFirstRector\Fixture;
+namespace Package\Tests\Rector\Fixture;
 
-class SomeClass
+class SomeClassTest
 {
-    public function handleLogin(User $user, string $password)
+    public function testExpectsEvents(): void
     {
-        return $user->isCorrectPassword($password);
+        $this->expectsEventsFoo([EventA::class, EventB::class]);
+    }
+
+    public function testExpectsJobs(): void
+    {
+        $bar->expectsJobsBar([Job::class]);
+    }
+
+    public function testExpectsNotifications(): void
+    {
+        $this->expectsNotificationsBaz([
+            NotificationA::class,
+            NotificationB::class,
+        ]);
     }
 }
-
-?>
