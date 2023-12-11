@@ -25,7 +25,7 @@ composer require --dev remarkablemark/rector-laravel-service-mocking
 
 ## Usage
 
-Register rule in `rector.php`:
+Register the rule in `rector.php`:
 
 ```php
 <?php
@@ -40,12 +40,15 @@ return static function (RectorConfig $rectorConfig): void {
 };
 ```
 
-Run inside of tests only:
+Update your config to run inside of tests only:
 
 ```php
-$rectorConfig->paths([
-    __DIR__ . '/tests',
-]);
+return static function (RectorConfig $rectorConfig): void {
+    $rectorConfig->paths([
+        __DIR__ . '/tests',
+    ]);
+    $rectorConfig->rule(LaravelServiceMockingRector::class);
+};
 ```
 
 See the diff:
