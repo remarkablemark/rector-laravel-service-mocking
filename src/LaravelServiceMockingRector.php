@@ -60,7 +60,7 @@ class SomeClassTest
 
     public function testExpectsJobs(): void
     {
-        \Illuminate\Support\Facades\Queue::fake([Job::class])->assertPushed([Job::class]);
+        \Illuminate\Support\Facades\Bus::fake([Job::class])->assertDispatched([Job::class]);
     }
 
     public function testExpectsNotification(): void
@@ -122,20 +122,20 @@ CODE_SAMPLE
 
             case 'expectsJobs':
                 $subNode->var = new StaticCall(
-                    new FullyQualified('Illuminate\Support\Facades\Queue'),
+                    new FullyQualified('Illuminate\Support\Facades\Bus'),
                     'fake',
                     $subNode->args
                 );
-                $subNode->name = new Identifier('assertPushed');
+                $subNode->name = new Identifier('assertDispatched');
                 return $node;
 
             case 'doesntExpectsJobs':
                 $subNode->var = new StaticCall(
-                    new FullyQualified('Illuminate\Support\Facades\Queue'),
+                    new FullyQualified('Illuminate\Support\Facades\Bus'),
                     'fake',
                     $subNode->args
                 );
-                $subNode->name = new Identifier('assertNotPushed');
+                $subNode->name = new Identifier('assertNotDispatched');
                 return $node;
 
             case 'expectsNotification':
@@ -150,7 +150,5 @@ CODE_SAMPLE
             default:
                 return null;
         }
-
-        return null;
     }
 }

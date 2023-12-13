@@ -36,7 +36,7 @@ class SomeClassTest
 
     public function testExpectsJobs(): void
     {
-        \Illuminate\Support\Facades\Queue::fake([Job::class])->assertPushed([Job::class]);
+        \Illuminate\Support\Facades\Bus::fake([Job::class])->assertDispatched([Job::class]);
     }
 
     public function testExpectsNotification(): void
