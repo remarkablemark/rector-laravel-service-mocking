@@ -20,7 +20,8 @@ final class LaravelServiceMockingRector extends AbstractRector
     /** @var BetterNodeFinder */
     protected $betterNodeFinder;
 
-    public function __construct(BetterNodeFinder $betterNodeFinder) {
+    public function __construct(BetterNodeFinder $betterNodeFinder)
+    {
         $this->betterNodeFinder = $betterNodeFinder;
     }
 
