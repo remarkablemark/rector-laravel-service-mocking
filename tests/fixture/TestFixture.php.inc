@@ -9,9 +9,9 @@ class SomeClassTest
         $this->expectsEvents([EventA::class, EventB::class]);
     }
 
-    public function testDoesntExpectsEvents(): void
+    public function testDoesntExpectEvents(): void
     {
-        $this->doesntExpectsEvents([EventA::class, EventB::class]);
+        $this->doesntExpectEvents([EventA::class, EventB::class]);
     }
 
     public function testExpectsJobs(): void
@@ -19,9 +19,9 @@ class SomeClassTest
         $this->expectsJobs([Job::class]);
     }
 
-    public function testDoesntExpectsJobs(): void
+    public function testDoesntExpectJobs(): void
     {
-        $this->doesntExpectsJobs([Job::class]);
+        $this->doesntExpectJobs([Job::class]);
     }
 
     public function testExpectsNotification(): void
@@ -44,7 +44,7 @@ class SomeClassTest
         \Illuminate\Support\Facades\Event::fake([EventA::class, EventB::class])->assertDispatched([EventA::class, EventB::class]);
     }
 
-    public function testDoesntExpectsEvents(): void
+    public function testDoesntExpectEvents(): void
     {
         \Illuminate\Support\Facades\Event::fake([EventA::class, EventB::class])->assertNotDispatched([EventA::class, EventB::class]);
     }
@@ -54,7 +54,7 @@ class SomeClassTest
         \Illuminate\Support\Facades\Bus::fake([Job::class])->assertDispatched([Job::class]);
     }
 
-    public function testDoesntExpectsJobs(): void
+    public function testDoesntExpectJobs(): void
     {
         \Illuminate\Support\Facades\Bus::fake([Job::class])->assertNotDispatched([Job::class]);
     }

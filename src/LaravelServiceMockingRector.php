@@ -119,7 +119,7 @@ final class LaravelServiceMockingRector extends AbstractRector
 
                     break;
 
-                case 'doesntExpectsEvents':
+                case 'doesntExpectEvents':
                     $subNode->var = new StaticCall(
                         new FullyQualified('Illuminate\Support\Facades\Event'),
                         'fake',
@@ -141,7 +141,7 @@ final class LaravelServiceMockingRector extends AbstractRector
 
                     break;
 
-                case 'doesntExpectsJobs':
+                case 'doesntExpectJobs':
                     $subNode->var = new StaticCall(
                         new FullyQualified('Illuminate\Support\Facades\Bus'),
                         'fake',
