@@ -96,67 +96,82 @@ final class LaravelServiceMockingRector extends AbstractRector
      */
     public function refactor(Node $node): ?Node
     {
-        $subNode = $this->betterNodeFinder->findFirstInstanceOf($node, MethodCall::class);
+        $subNodes = $this->betterNodeFinder->findInstanceOf($node, MethodCall::class);
 
-        if (!$subNode) {
+        if (!$subNodes) {
             return null;
         }
 
-        $methodName = $this->getName($subNode->name);
+        $hasChanged = false;
 
-        switch ($methodName) {
-            case 'expectsEvents':
-                $subNode->var = new StaticCall(
-                    new FullyQualified('Illuminate\Support\Facades\Event'),
-                    'fake',
-                    $subNode->args
-                );
-                $subNode->name = new Identifier('assertDispatched');
+        foreach ($subNodes as $subNode) {
+            $methodName = $this->getName($subNode->name);
 
-                return $node;
+            switch ($methodName) {
+                case 'expectsEvents':
+                    $subNode->var = new StaticCall(
+                        new FullyQualified('Illuminate\Support\Facades\Event'),
+                        'fake',
+                        $subNode->args
+                    );
+                    $subNode->name = new Identifier('assertDispatched');
+                    $hasChanged = true;
 
-            case 'doesntExpectsEvents':
-                $subNode->var = new StaticCall(
-                    new FullyQualified('Illuminate\Support\Facades\Event'),
-                    'fake',
-                    $subNode->args
-                );
-                $subNode->name = new Identifier('assertNotDispatched');
+                    break;
 
-                return $node;
+                case 'doesntExpectsEvents':
+                    $subNode->var = new StaticCall(
+                        new FullyQualified('Illuminate\Support\Facades\Event'),
+                        'fake',
+                        $subNode->args
+                    );
+                    $subNode->name = new Identifier('assertNotDispatched');
+                    $hasChanged = true;
 
-            case 'expectsJobs':
-                $subNode->var = new StaticCall(
-                    new FullyQualified('Illuminate\Support\Facades\Bus'),
-                    'fake',
-                    $subNode->args
-                );
-                $subNode->name = new Identifier('assertDispatched');
+                    break;
 
-                return $node;
+                case 'expectsJobs':
+                    $subNode->var = new StaticCall(
+                        new FullyQualified('Illuminate\Support\Facades\Bus'),
+                        'fake',
+                        $subNode->args
+                    );
+                    $subNode->name = new Identifier('assertDispatched');
+                    $hasChanged = true;
 
-            case 'doesntExpectsJobs':
-                $subNode->var = new StaticCall(
-                    new FullyQualified('Illuminate\Support\Facades\Bus'),
-                    'fake',
-                    $subNode->args
-                );
-                $subNode->name = new Identifier('assertNotDispatched');
+                    break;
 
-                return $node;
+                case 'doesntExpectsJobs':
+                    $subNode->var = new StaticCall(
+                        new FullyQualified('Illuminate\Support\Facades\Bus'),
+                        'fake',
+                        $subNode->args
+                    );
+                    $subNode->name = new Identifier('assertNotDispatched');
+                    $hasChanged = true;
 
-            case 'expectsNotification':
-                $subNode->var = new StaticCall(
-                    new FullyQualified('Illuminate\Support\Facades\Notification'),
-                    'fake',
-                    $subNode->args
-                );
-                $subNode->name = new Identifier('assertSentTo');
+                    break;
 
-                return $node;
+                case 'expectsNotification':
+                    $subNode->var = new StaticCall(
+                        new FullyQualified('Illuminate\Support\Facades\Notification'),
+                        'fake',
+                        $subNode->args
+                    );
+                    $subNode->name = new Identifier('assertSentTo');
+                    $hasChanged = true;
 
-            default:
-                return null;
+                    break;
+
+                default:
+                    break;
+            }
         }
+
+        if ($hasChanged) {
+            return $node;
+        }
+
+        return null;
     }
 }
