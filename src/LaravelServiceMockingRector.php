@@ -17,9 +17,13 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 final class LaravelServiceMockingRector extends AbstractRector
 {
-    public function __construct(
-        private BetterNodeFinder $betterNodeFinder
-    ) {}
+    /** @var BetterNodeFinder */
+    protected $betterNodeFinder;
+
+    public function __construct(BetterNodeFinder $betterNodeFinder)
+    {
+        $this->betterNodeFinder = $betterNodeFinder;
+    }
 
     public function getRuleDefinition(): RuleDefinition
     {

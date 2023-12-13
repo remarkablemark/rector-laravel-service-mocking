@@ -13,7 +13,7 @@ From [Laravel 10](https://laravel.com/docs/10.x/upgrade#service-mocking):
 
 ## Requirements
 
-PHP >=8.0
+PHP >=7.4
 
 ## Install
 
