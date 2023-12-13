@@ -54,13 +54,13 @@ return static function (RectorConfig $rectorConfig): void {
 See the diff:
 
 ```php
-vendor/bin/rector process src --dry-run
+vendor/bin/rector process --dry-run
 ```
 
 Apply the rule:
 
 ```php
-vendor/bin/rector process src
+vendor/bin/rector process
 ```
 
 ## Rule
