@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2](https://github.com/remarkablemark/rector-laravel-service-mocking/compare/v1.0.1...v1.0.2) (2023-12-13)
+
+
+### Bug Fixes
+
+* replace `Queue` with `Bus` facade ([0860e09](https://github.com/remarkablemark/rector-laravel-service-mocking/commit/0860e09f52272b9aef6094e412b5738803e84754))
+
 ## [1.0.1](https://github.com/remarkablemark/rector-laravel-service-mocking/compare/v1.0.0...v1.0.1) (2023-12-11)
 
 
