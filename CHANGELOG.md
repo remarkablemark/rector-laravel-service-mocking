@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.3](https://github.com/remarkablemark/rector-laravel-service-mocking/compare/v1.0.2...v1.0.3) (2023-12-13)
+
+
+### Bug Fixes
+
+* fix rector fatal errors ([db49d9b](https://github.com/remarkablemark/rector-laravel-service-mocking/commit/db49d9b4d029e01d2327c7bb5a01205dc29b75e9))
+
 ## [1.0.2](https://github.com/remarkablemark/rector-laravel-service-mocking/compare/v1.0.1...v1.0.2) (2023-12-13)
 
 
