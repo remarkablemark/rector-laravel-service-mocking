@@ -63,6 +63,12 @@ Apply the rule:
 vendor/bin/rector process
 ```
 
+Apply the rule with cache cleared:
+
+```php
+vendor/bin/rector process --clear-cache
+```
+
 ## Rule
 
 ### Before
