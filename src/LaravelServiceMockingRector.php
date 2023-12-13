@@ -19,8 +19,7 @@ final class LaravelServiceMockingRector extends AbstractRector
 {
     public function __construct(
         private BetterNodeFinder $betterNodeFinder
-    ) {
-    }
+    ) {}
 
     public function getRuleDefinition(): RuleDefinition
     {
@@ -29,53 +28,53 @@ final class LaravelServiceMockingRector extends AbstractRector
             [
                 new CodeSample(
                     <<<'CODE_SAMPLE'
-class SomeClassTest
-{
-    public function testExpectsEvents(): void
-    {
-        $this->expectsEvents([EventA::class, EventB::class]);
-    }
+                        class SomeClassTest
+                        {
+                            public function testExpectsEvents(): void
+                            {
+                                $this->expectsEvents([EventA::class, EventB::class]);
+                            }
 
-    public function testExpectsJobs(): void
-    {
-        $this->expectsJobs([Job::class]);
-    }
+                            public function testExpectsJobs(): void
+                            {
+                                $this->expectsJobs([Job::class]);
+                            }
 
-    public function testExpectsNotification(): void
-    {
-        $this->expectsNotification([
-            NotificationA::class,
-            NotificationB::class,
-        ]);
-    }
-}
-CODE_SAMPLE,
+                            public function testExpectsNotification(): void
+                            {
+                                $this->expectsNotification([
+                                    NotificationA::class,
+                                    NotificationB::class,
+                                ]);
+                            }
+                        }
+                        CODE_SAMPLE,
                     <<<'CODE_SAMPLE'
-class SomeClassTest
-{
-    public function testExpectsEvents(): void
-    {
-        \Illuminate\Support\Facades\Event::fake([EventA::class, EventB::class])->assertDispatched([EventA::class, EventB::class]);
-    }
+                        class SomeClassTest
+                        {
+                            public function testExpectsEvents(): void
+                            {
+                                \Illuminate\Support\Facades\Event::fake([EventA::class, EventB::class])->assertDispatched([EventA::class, EventB::class]);
+                            }
 
-    public function testExpectsJobs(): void
-    {
-        \Illuminate\Support\Facades\Queue::fake([Job::class])->assertPushed([Job::class]);
-    }
+                            public function testExpectsJobs(): void
+                            {
+                                \Illuminate\Support\Facades\Bus::fake([Job::class])->assertDispatched([Job::class]);
+                            }
 
-    public function testExpectsNotification(): void
-    {
-        \Illuminate\Support\Facades\Notification::fake([
-            NotificationA::class,
-            NotificationB::class,
-        ])->assertSentTo([
-            NotificationA::class,
-            NotificationB::class,
-        ]);
-    }
-}
-CODE_SAMPLE
-                )
+                            public function testExpectsNotification(): void
+                            {
+                                \Illuminate\Support\Facades\Notification::fake([
+                                    NotificationA::class,
+                                    NotificationB::class,
+                                ])->assertSentTo([
+                                    NotificationA::class,
+                                    NotificationB::class,
+                                ]);
+                            }
+                        }
+                        CODE_SAMPLE
+                ),
             ]
         );
     }
@@ -95,7 +94,7 @@ CODE_SAMPLE
     {
         $subNode = $this->betterNodeFinder->findFirstInstanceOf($node, MethodCall::class);
 
-        if (! $subNode) {
+        if (!$subNode) {
             return null;
         }
 
@@ -109,6 +108,7 @@ CODE_SAMPLE
                     $subNode->args
                 );
                 $subNode->name = new Identifier('assertDispatched');
+
                 return $node;
 
             case 'doesntExpectsEvents':
@@ -118,24 +118,27 @@ CODE_SAMPLE
                     $subNode->args
                 );
                 $subNode->name = new Identifier('assertNotDispatched');
+
                 return $node;
 
             case 'expectsJobs':
                 $subNode->var = new StaticCall(
-                    new FullyQualified('Illuminate\Support\Facades\Queue'),
+                    new FullyQualified('Illuminate\Support\Facades\Bus'),
                     'fake',
                     $subNode->args
                 );
-                $subNode->name = new Identifier('assertPushed');
+                $subNode->name = new Identifier('assertDispatched');
+
                 return $node;
 
             case 'doesntExpectsJobs':
                 $subNode->var = new StaticCall(
-                    new FullyQualified('Illuminate\Support\Facades\Queue'),
+                    new FullyQualified('Illuminate\Support\Facades\Bus'),
                     'fake',
                     $subNode->args
                 );
-                $subNode->name = new Identifier('assertNotPushed');
+                $subNode->name = new Identifier('assertNotDispatched');
+
                 return $node;
 
             case 'expectsNotification':
@@ -145,12 +148,11 @@ CODE_SAMPLE
                     $subNode->args
                 );
                 $subNode->name = new Identifier('assertSentTo');
+
                 return $node;
 
             default:
                 return null;
         }
-
-        return null;
     }
 }
