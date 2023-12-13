@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.5](https://github.com/remarkablemark/rector-laravel-service-mocking/compare/v1.0.4...v1.0.5) (2023-12-13)
+
+
+### Bug Fixes
+
+* fix test method names `doesntExpectEvents` and `doesntExpectJobs` ([84be307](https://github.com/remarkablemark/rector-laravel-service-mocking/commit/84be307e045fee7cd4454e05a2239eaeeab9ddf5))
+
 ## [1.0.4](https://github.com/remarkablemark/rector-laravel-service-mocking/compare/v1.0.3...v1.0.4) (2023-12-13)
 
 
