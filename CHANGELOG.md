@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.4](https://github.com/remarkablemark/rector-laravel-service-mocking/compare/v1.0.3...v1.0.4) (2023-12-13)
+
+
+### Bug Fixes
+
+* find and refactor multiple nodes instead of the first one ([effedd8](https://github.com/remarkablemark/rector-laravel-service-mocking/commit/effedd8398cd9afc19ab440de5a99a3e82df85e6))
+
 ## [1.0.3](https://github.com/remarkablemark/rector-laravel-service-mocking/compare/v1.0.2...v1.0.3) (2023-12-13)
 
 
