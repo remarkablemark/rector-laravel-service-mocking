@@ -3,7 +3,7 @@
 [![packagist](https://img.shields.io/packagist/v/remarkablemark/rector-laravel-service-mocking)](https://packagist.org/packages/remarkablemark/rector-laravel-service-mocking)
 [![test](https://github.com/remarkablemark/rector-laravel-service-mocking/actions/workflows/test.yml/badge.svg)](https://github.com/remarkablemark/rector-laravel-service-mocking/actions/workflows/test.yml)
 
-Rector to replace deprecated Laravel service mocking testing methods such as `expectsEvents`, `expectsJobs`, and `expectsNotifications`.
+[Rector](https://github.com/rectorphp/rector) to replace deprecated Laravel service mocking testing methods such as `expectsEvents`, `expectsJobs`, and `expectsNotifications`.
 
 From [Laravel 10](https://laravel.com/docs/10.x/upgrade#service-mocking):
 
@@ -20,27 +20,12 @@ PHP >=7.4
 Install with [Composer](http://getcomposer.org/):
 
 ```sh
-composer require --dev remarkablemark/rector-laravel-service-mocking
+composer require --dev rector/rector remarkablemark/rector-laravel-service-mocking
 ```
 
 ## Usage
 
 Register the rule in `rector.php`:
-
-```php
-<?php
-
-declare(strict_types=1);
-
-use Rector\Config\RectorConfig;
-use Remarkablemark\RectorLaravelServiceMocking\LaravelServiceMockingRector;
-
-return static function (RectorConfig $rectorConfig): void {
-    $rectorConfig->rule(LaravelServiceMockingRector::class);
-};
-```
-
-Update your config to apply the rule in tests only:
 
 ```php
 <?php
