@@ -40,9 +40,16 @@ return static function (RectorConfig $rectorConfig): void {
 };
 ```
 
-Update your config to run inside of tests only:
+Update your config to apply the rule in tests only:
 
 ```php
+<?php
+
+declare(strict_types=1);
+
+use Rector\Config\RectorConfig;
+use Remarkablemark\RectorLaravelServiceMocking\LaravelServiceMockingRector;
+
 return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->paths([
         __DIR__ . '/tests',
