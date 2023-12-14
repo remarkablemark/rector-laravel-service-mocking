@@ -55,7 +55,7 @@ Apply the rule:
 vendor/bin/rector process
 ```
 
-Apply the rule with cache cleared:
+Clear the cache and apply the rule:
 
 ```php
 vendor/bin/rector process --clear-cache
