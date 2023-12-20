@@ -107,7 +107,7 @@ final class LaravelServiceMockingRector extends AbstractRector
         foreach ($subNodes as $subNode) {
             $variableName = $this->getName($subNode->var);
 
-            if ($variableName !== 'this') {
+            if ('this' !== $variableName) {
                 continue;
             }
 
