@@ -4,6 +4,8 @@
     "description": "Rector to replace deprecated Laravel service mocking testing methods",
     "keywords": [
         "rector",
+        "refactor",
+        "codemod",
         "laravel",
         "service",
         "mocking",
