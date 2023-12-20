@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Package\Tests\Rector\Fixture;
 
 class SomeClassTest
@@ -34,6 +36,8 @@ class SomeClassTest
 }
 -----
 <?php
+
+declare(strict_types=1);
 
 namespace Package\Tests\Rector\Fixture;
 
