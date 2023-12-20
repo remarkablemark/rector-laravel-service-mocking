@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.6](https://github.com/remarkablemark/rector-laravel-service-mocking/compare/v1.0.5...v1.0.6) (2023-12-20)
+
+
+### Miscellaneous Chores
+
+* **composer:** add keywords ([b44d71d](https://github.com/remarkablemark/rector-laravel-service-mocking/commit/b44d71ddbd2585cb0ec68122a797a27edc66cdd7))
+
 ## [1.0.5](https://github.com/remarkablemark/rector-laravel-service-mocking/compare/v1.0.4...v1.0.5) (2023-12-13)
 
 
