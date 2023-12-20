@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.7](https://github.com/remarkablemark/rector-laravel-service-mocking/compare/v1.0.6...v1.0.7) (2023-12-20)
+
+
+### Bug Fixes
+
+* skip refactor if method is not on $this variable ([1e56ba7](https://github.com/remarkablemark/rector-laravel-service-mocking/commit/1e56ba7afb61c43b01cf8eb9a08d575942a37b8e))
+
 ## [1.0.6](https://github.com/remarkablemark/rector-laravel-service-mocking/compare/v1.0.5...v1.0.6) (2023-12-20)
 
 
