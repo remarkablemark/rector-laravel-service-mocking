@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/remarkablemark/rector-laravel-service-mocking/compare/v1.0.7...v2.0.0) (2024-02-26)
+
+
+### ⚠ BREAKING CHANGES
+
+* update imports to support rector v1
+
+### Code Refactoring
+
+* update rector imports ([2a847d5](https://github.com/remarkablemark/rector-laravel-service-mocking/commit/2a847d5ec6334d39dada18143b45df9241c37d09))
+
 ## [1.0.7](https://github.com/remarkablemark/rector-laravel-service-mocking/compare/v1.0.6...v1.0.7) (2023-12-20)
 
 
