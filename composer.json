@@ -30,7 +30,7 @@
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "3.52.1",
-        "phpunit/phpunit": "10.5.13",
+        "phpunit/phpunit": "10.5.14",
         "rector/rector": "1.0.3",
         "symplify/rule-doc-generator": "12.1.10"
     },
