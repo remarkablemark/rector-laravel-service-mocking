@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.1](https://github.com/remarkablemark/rector-laravel-service-mocking/compare/v2.0.0...v2.0.1) (2025-03-07)
+
+
+### Miscellaneous Chores
+
+* **github:** delete FUNDING.yml ([d642db0](https://github.com/remarkablemark/rector-laravel-service-mocking/commit/d642db053b7656dee4c66d9f643c0fad609971da))
+
 ## [2.0.0](https://github.com/remarkablemark/rector-laravel-service-mocking/compare/v1.0.7...v2.0.0) (2024-02-26)
 
 
