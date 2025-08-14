@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.0.0](https://github.com/remarkablemark/rector-laravel-service-mocking/compare/v2.0.1...v3.0.0) (2025-08-14)
+
+
+### ⚠ BREAKING CHANGES
+
+* **composer:** require php >=8.2 in composer.json
+
+### Build System
+
+* **composer:** require php &gt;=8.2 ([7a99663](https://github.com/remarkablemark/rector-laravel-service-mocking/commit/7a99663c834090d8370cc22fcd333e80864d069b))
+
 ## [2.0.1](https://github.com/remarkablemark/rector-laravel-service-mocking/compare/v2.0.0...v2.0.1) (2025-03-07)
 
 
