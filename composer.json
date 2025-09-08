@@ -31,7 +31,7 @@
     "require-dev": {
         "friendsofphp/php-cs-fixer": "3.87.1",
         "phpunit/phpunit": "10.5.27",
-        "rector/rector": "2.1.5",
+        "rector/rector": "2.1.6",
         "symplify/rule-doc-generator": "12.2.5"
     },
     "scripts": {
